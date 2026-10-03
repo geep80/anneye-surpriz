@@ -1,0 +1,426 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at center, #26002f 0%, #09000f 45%, #000 100%);
+
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+/* ARKA PLAN IŞIĞI */
+
+.background-glow {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: conic-gradient(
+        #ff0080,
+        #7b00ff,
+        #00eaff,
+        #00ff88,
+        #fff000,
+        #ff0080
+    );
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: 0.25;
+
+    animation: rotateGlow 8s linear infinite;
+}
+
+
+/* ANA ALAN */
+
+.content {
+    position: relative;
+    z-index: 10;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* ÜSTTEKİ KALP */
+
+.small-heart {
+    font-size: 70px;
+
+    margin-bottom: 10px;
+
+    animation:
+        heartBeat 1.5s infinite,
+        rainbow 4s linear infinite;
+
+    text-shadow:
+        0 0 15px #ff0080,
+        0 0 40px #ff0080,
+        0 0 80px #7b00ff;
+}
+
+
+/* ANA YAZI */
+
+h1 {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    font-size: clamp(55px, 9vw, 110px);
+
+    font-weight: 900;
+
+    line-height: 0.95;
+
+    animation: textGlow 3s infinite alternate;
+}
+
+
+/* HER SATIR FARKLI RENK */
+
+h1 span:nth-child(1) {
+    animation: rainbow 5s linear infinite;
+}
+
+h1 span:nth-child(2) {
+    animation: rainbow 5s linear infinite;
+    animation-delay: 1s;
+}
+
+h1 span:nth-child(3) {
+    animation: rainbow 5s linear infinite;
+    animation-delay: 2s;
+}
+
+
+/* ALT ÇİZGİ */
+
+.line {
+    width: 280px;
+    height: 5px;
+
+    margin-top: 35px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #ff0080,
+        #ffea00,
+        #00ffff,
+        #7b00ff,
+        #ff0080
+    );
+
+    background-size: 300%;
+
+    animation: lineRGB 3s linear infinite;
+
+    box-shadow:
+        0 0 10px #ff0080,
+        0 0 30px #7b00ff;
+}
+
+
+/* ALT YAZI */
+
+p {
+    margin-top: 25px;
+
+    font-size: 25px;
+
+    animation: rainbow 4s linear infinite;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 30px #ff0080;
+}
+
+
+/* KALPLER */
+
+.heart {
+    position: fixed;
+
+    bottom: -80px;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    animation: floatHeart linear forwards;
+
+    filter:
+        drop-shadow(0 0 8px currentColor)
+        drop-shadow(0 0 20px currentColor);
+}
+
+
+/* BALON */
+
+.balloon {
+    position: fixed;
+
+    bottom: -150px;
+
+    width: 70px;
+    height: 85px;
+
+    border-radius: 50% 50% 48% 48%;
+
+    z-index: 2;
+
+    animation: balloonUp linear forwards;
+
+    box-shadow:
+        inset -10px -10px 20px rgba(0,0,0,0.25),
+        inset 10px 10px 20px rgba(255,255,255,0.3),
+        0 0 25px currentColor;
+}
+
+
+/* BALONUN UCU */
+
+.balloon::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -12px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 12px;
+    height: 15px;
+
+    background: inherit;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+}
+
+
+/* BALON İPİ */
+
+.string {
+    position: absolute;
+
+    left: 50%;
+    top: 100%;
+
+    width: 1px;
+    height: 120px;
+
+    background: rgba(255,255,255,0.6);
+
+    transform: rotate(3deg);
+}
+
+
+/* RGB ANİMASYONLARI */
+
+@keyframes rainbow {
+
+    0% {
+        color: #ff0055;
+        filter: hue-rotate(0deg);
+    }
+
+    25% {
+        color: #ffea00;
+    }
+
+    50% {
+        color: #00ff88;
+    }
+
+    75% {
+        color: #00eaff;
+    }
+
+    100% {
+        color: #ff0055;
+        filter: hue-rotate(360deg);
+    }
+}
+
+
+@keyframes textGlow {
+
+    0% {
+        text-shadow:
+            0 0 10px #ff0080,
+            0 0 30px #ff0080;
+    }
+
+    50% {
+        text-shadow:
+            0 0 20px #00eaff,
+            0 0 50px #00eaff,
+            0 0 90px #7b00ff;
+    }
+
+    100% {
+        text-shadow:
+            0 0 20px #ffea00,
+            0 0 50px #ff0080,
+            0 0 100px #ff0080;
+    }
+}
+
+
+@keyframes lineRGB {
+
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 300%;
+    }
+}
+
+
+@keyframes rotateGlow {
+
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+
+@keyframes heartBeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+
+@keyframes floatHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(-50vh)
+            translateX(50px)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translateY(-120vh)
+            translateX(-80px)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+@keyframes balloonUp {
+
+    0% {
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(-5deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(-60vh)
+            translateX(50px)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            translateY(-130vh)
+            translateX(-50px)
+            rotate(-5deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* TELEFON */
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 55px;
+    }
+
+    .small-heart {
+        font-size: 55px;
+    }
+
+    .line {
+        width: 200px;
+    }
+
+    .balloon {
+        width: 50px;
+        height: 65px;
+    }
+
+}
